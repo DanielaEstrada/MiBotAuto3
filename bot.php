@@ -1,6 +1,6 @@
 <?php
 // Token de acceso del bot proporcionado por BotFather
-define('BOT_TOKEN', 'TU_TOKEN_DE_ACCESO');
+define('BOT_TOKEN', '7038253395:AAEamokL-50vV0SrBjMhZwmSPrhbpvVFu70');
 
 // Función para enviar mensajes al bot
 function enviarMensaje($chat_id, $mensaje) {
