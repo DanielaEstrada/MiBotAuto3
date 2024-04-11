@@ -1,48 +1,58 @@
 <?php
 // Token de acceso del bot proporcionado por BotFather
-define('BOT_TOKEN', '6997496940:AAFrR2MmZl6uk8lQO4i9M0tFgr8cnZvymBo');
+$token = '6997496940:AAFrR2MmZl6uk8lQO4i9M0tFgr8cnZvymBo';
+//Acceso a la web de Telegram
+$website = 'https://api.telegram.org/bot' .$token;
 
-// Función para enviar mensajes al bot
-function enviarMensaje($chat_id, $mensaje) {
-    $url = 'https://api.telegram.org/bot' . BOT_TOKEN . '/sendMessage?chat_id=' . $chat_id . '&text=' . urlencode($mensaje);
-    file_get_contents($url);
-}
+$input = file_get_contents('php://input');
+$update = json_decode($input, TRUE);
 
-// Procesar el mensaje recibido del bot
-$update = json_decode(file_get_contents('php://input'), true);
+$chatId = $update['message'] ['chat'] ['id'];
+$message = $update['message'] ['text'];
 
-if (isset($update['message'])) {
-    $chat_id = $update['message']['chat']['id'];
-    $mensaje_recibido = strtolower($update['message']['text']);
-
-    // Respuestas según el mensaje recibido
-    switch ($mensaje_recibido) {
+//Recibe el mensaje
+switch($message) {
+        case '/start':
+            $response = 'Bienvenido a MiBotSupermercado.';
+            sendMessage($chatId, $response);
+            break;
         case 'carne':
         case 'queso':
-        case 'jamón':
-            enviarMensaje($chat_id, 'Los productos se encuentran en el Pasillo 1.');
+        case 'jamon':
+            $response = 'Los productos se encuentran en el Pasillo 1.';
+            sendMessage($chat_id, $response);
             break;
         case 'leche':
         case 'yogurth':
         case 'cereal':
-            enviarMensaje($chat_id, 'Los productos se encuentran en el Pasillo 2.');
+            $response = 'Los productos se encuentran en el Pasillo 2.';
+            sendMessage($chat_id, $response);
             break;
         case 'bebidas':
         case 'jugos':
-            enviarMensaje($chat_id, 'Los productos se encuentran en el Pasillo 3.');
+            $response = 'Los productos se encuentran en el Pasillo 3.';
+            sendMessage($chat_id, $response);
             break;
         case 'pan':
         case 'pasteles':
         case 'tortas':
-            enviarMensaje($chat_id, 'Los productos se encuentran en el Pasillo 4.');
+            $response = 'Los productos se encuentran en el Pasillo 4.';
+            sendMessage($chat_id, $response);
             break;
         case 'detergente':
         case 'lavaloza':
-            enviarMensaje($chat_id, 'Los productos se encuentran en el Pasillo 5.');
+            $response = 'Los productos se encuentran en el Pasillo 5.';
+            sendMessage($chat_id, $response);
             break;
         default:
-            enviarMensaje($chat_id, 'Lo siento, no entendí la pregunta.');
+            $response = 'Lo siento, no entendí la pregunta.';
+            sendMessage($chat_id, $response);
             break;
-    }
+}
+
+ // Función para enviar mensajes al bot
+function enviarMensaje($chat_id, $mensaje) {
+    $url = $GLOBALS[‘website’]. ’/sendMessage?chat_id=’ .$chatId. ‘&parse_mode=HTML&text=’. urlencode($respuesta);
+    file_get_contents($url);
 }
 ?>
