@@ -51,7 +51,7 @@ switch($message) {
 }
 
  // Función para enviar mensajes al bot
-function enviarMensaje($chat_id, $mensaje) {
+function enviarMensaje($chat_id, $response) {
     $url = $GLOBALS[‘website’]. ’/sendMessage?chat_id=’ .$chatId. ‘&parse_mode=HTML&text=’. urlencode($response);
     file_get_contents($url);
 }
